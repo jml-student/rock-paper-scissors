@@ -50,6 +50,8 @@ function playGame() {
     
     if (playerScore < computerScore) {
         console.log("You Lose!")
+    } else if (playerScore == computerScore) {
+        console.log("It's Tie!")
     } else {
         console.log("You Win!")
     }
