@@ -3,58 +3,68 @@ function getComputerChoice() {
     return(choices[(Math.floor(Math.random() * choices.length))]);
 }
 
+let result = document.querySelector(".result");
+let userScoreContent = document.querySelector(".userScore");
+let computerScoreContent = document.querySelector(".computerScore");
+
+let userScore = 0;
+let computerScore = 0;
+
 function playRound(playerSelection, computerSelection) {
-    const lowerPlayerSelection = playerSelection.toLowerCase();
-    const lowerComputerSelection = computerSelection.toLowerCase();
-
-    if (lowerPlayerSelection === "rock" && lowerComputerSelection === "paper") {
-        console.log("You Lose! Paper beats Rock");
-        return "lose";
+    if (playerSelection === "rock" && computerSelection === "paper") {
+        result.textContent = "You Lose! Paper beats Rock";
+        computerScore++
+        computerScoreContent.textContent = computerScore
     }
-    if (lowerPlayerSelection === "paper" && lowerComputerSelection === "scissors") {
-        console.log("You Lose! Scissors beats Paper");
-        return "lose";
+    if (playerSelection === "paper" && computerSelection === "scissors") {
+        result.textContent = "You Lose! Scissors beats Paper";
+        computerScore++
+        computerScoreContent.textContent = computerScore
     }
-    if (lowerPlayerSelection === "scissors" && lowerComputerSelection === "rock") {
-        console.log("You Lose! Rock beats Scissors");
-        return "lose";
+    if (playerSelection === "scissors" && computerSelection === "rock") {
+        result.textContent = "You Lose! Rock beats Scissors";
+        computerScore++
+        computerScoreContent.textContent = computerScore
     }
-    if (lowerPlayerSelection === "rock" && lowerComputerSelection === "scissors") {
-        console.log("You Win! Rock beats Scissors");
-        return "win";
+    if (playerSelection === "rock" && computerSelection === "scissors") {
+        result.textContent = "You Win! Rock beats Scissors";
+        userScore++
+        userScoreContent.textContent = userScore
     }
-    if (lowerPlayerSelection === "paper" && lowerComputerSelection === "rock") {
-        console.log("You Win! Paper beats Rock");
-        return "win";
+    if (playerSelection === "paper" && computerSelection === "rock") {
+        result.textContent = "You Win! Paper beats Rock";
+        userScore++
+        userScoreContent.textContent = userScore
     }
-    if (lowerPlayerSelection === "scissors" && lowerComputerSelection === "paper") {
-        console.log("You Win! Scissors beats Paper");
-        return "win";
+    if (playerSelection === "scissors" && computerSelection === "paper") {
+        result.textContent = "You Win! Scissors beats Paper";
+        userScore++
+        userScoreContent.textContent = userScore
     } else {
-        console.log("Tie!");
+        result.textContent = "Tie!";
     }
 }
 
-function playGame() {
-    let playerScore = 0;
-    let computerScore = 0;
 
-    for (let i = 0; i < 5; i++) {
-        let result = playRound(prompt("Rock/Paper/Scissors"), getComputerChoice());
-        if (result === "win") {
-            playerScore++;
-        } else if (result === "lose") {
-            computerScore++;
-        }
-    }
-    
-    if (playerScore < computerScore) {
-        console.log("You Lose!")
-    } else if (playerScore == computerScore) {
-        console.log("It's Tie!")
-    } else {
-        console.log("You Win!")
-    }
-}
+let userButtonSelection = "";
 
-playGame()
+const rockButton = document.querySelector(".rock");
+const paperButton = document.querySelector(".paper");
+const scissorsButton = document.querySelector(".scissors");
+
+rockButton.addEventListener("click", function() {
+    userButtonSelection = "rock";
+    playRound(userButtonSelection, getComputerChoice());
+});
+
+paperButton.addEventListener("click", function() {
+    userButtonSelection = "paper";
+    playRound(userButtonSelection, getComputerChoice());
+});
+
+scissorsButton.addEventListener("click", function() {
+    userButtonSelection = "scissors";
+    playRound(userButtonSelection, getComputerChoice());
+});
+
+
